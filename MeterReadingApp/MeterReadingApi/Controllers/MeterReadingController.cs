@@ -16,6 +16,7 @@ namespace MeterReadingApi.Controllers
         }
 
         [HttpPost]
+        [Route("/meter-reading-uploads")]
         public async Task<ActionResult<PostMeterReadingsResponse>> Post(IFormFile meterReadingsFile)
         {
             using var meterReadingStream = new MemoryStream();
