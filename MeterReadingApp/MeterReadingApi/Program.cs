@@ -1,10 +1,12 @@
 using MeterReadingApi.Repositories;
+using MeterReadingApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<IAccountsRepository, AccountsRepository>();
 builder.Services.AddSingleton<IMeterReadingsRepository, MeterReadingsRepository>();
+builder.Services.AddTransient<IMeterReadingsService, MeterReadingsService>();
 
 builder.Services.AddControllers();
 
