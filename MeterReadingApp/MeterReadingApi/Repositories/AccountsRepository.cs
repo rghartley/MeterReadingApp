@@ -21,7 +21,6 @@ namespace MeterReadingApi.Repositories
                 ? new NotFoundResult<Account>()
                 : new SuccessfulResult<Account>(account);
         }
-        
 
         private void SeedDatabase()
         {
