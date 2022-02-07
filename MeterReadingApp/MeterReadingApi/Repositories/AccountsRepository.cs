@@ -24,17 +24,24 @@ namespace MeterReadingApi.Repositories
 
         private void SeedDatabase()
         {
-            // The link to the test accounts spreadsheet was missing in the e-mail.
-            // Therefore I'm creating a range of accounts that will include all the accounts in the meter reading spreadsheet.
-            // I've excluded account 8766 from the seeding, so unknown accounts can be tested for.
-            for (var index = 1234; index < 8766; index++)
+            var filePath = Path.Combine(AppContext.BaseDirectory, "SampleData", "Test_Accounts.csv");
+            var accounts = File.ReadAllLines(filePath);
+
+            for (var index = 1; index < accounts.Length; index++)
             {
+                var accountFields = accounts[index].Split(",");
+                var accountId = accountFields[0];
+                var firstName = accountFields[1];
+                var lastName = accountFields[2];
+
                 var account = new Account
                 {
-                    Id = index
+                    Id = Convert.ToInt32(accountId),
+                    FirstName = firstName,
+                    LastName = lastName
                 };
 
-                this.accounts.TryAdd(index, account);
+                this.accounts.TryAdd(account.Id, account);
             }
         }
     }
